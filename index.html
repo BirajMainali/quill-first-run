@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.snow.css" rel="stylesheet" />
+
+    <div id="toolbar">
+        <button class="ql-bold">Bold</button>
+        <button class="ql-italic">Italic</button>
+        <button class="ql-save">Save</button>
+        <button class="ql-print">Print</button>
+    </div>
+
+
+    <div id="editor">
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toolbarOptions = [
+                ['bold', 'italic', 'underline', 'strike'],
+                ['blockquote', 'code-block'],
+
+                [{ 'header': 1 }, { 'header': 2 }],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'script': 'sub' }, { 'script': 'super' }],
+                [{ 'indent': '-1' }, { 'indent': '+1' }],
+                [{ 'direction': 'rtl' }],
+
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'font': [] }],
+                [{ 'align': [] }],
+
+                ['clean'],
+
+                ['link', 'image', 'video']
+            ];
+
+            const quill = new Quill('#editor', {
+                modules: {
+                    toolbar: toolbarOptions
+                },
+                theme: 'snow'
+            });
+
+            const saveButton = document.querySelector(".ql-save");
+            saveButton.addEventListener("click", function () {
+                const content = quill.getContents();
+                console.log(JSON.stringify(content));
+            });
+
+
+            const content = { "ops": [{ "attributes": { "font": "monospace", "background": "#008a00" }, "insert": "Codesparks Technology, " }, { "attributes": { "header": 1 }, "insert": "\n" }] }
+            quill.setContents(content);
+
+        });
+
+    </script>
+</body>
+
+</html>
